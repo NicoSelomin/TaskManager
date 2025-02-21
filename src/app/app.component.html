@@ -2,55 +2,9 @@
   <!-- Header -->
   <header class="bg-blue-600 dark:bg-blue-800 text-white py-4 shadow-lg flex justify-between items-center px-6">
     <div class="text-2xl font-bold">Gestionnaire de Tâches ✅</div>
-  <button (click)="toggleDarkMode()" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg">
-      {{ isDarkMode ? '☀️' : '🌙' }}
-  </button>
+    <button class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-black dark:text-white rounded-lg">
+      🌙
+    </button>
   </header>
-
-  <!-- Main Section -->
-  <main class="container mx-auto px-4 mt-6 py-6">
-    <!-- Présentation -->
-    <section class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md text-center">
-      <h2 class="text-3xl font-semibold text-gray-800 dark:text-gray-200">Organisez vos tâches efficacement</h2>
-      <p class="text-gray-600 dark:text-gray-400 mt-2">Ajoutez, suivez et complétez vos tâches facilement.</p>
-      <button
-        class="mt-4 px-6 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition">+
-        Ajouter une Tâche</button>
-    </section>
-
-    <!-- Liste des Tâches -->
-    <section class="mt-8">
-      <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Vos Tâches</h3>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Exemple de Tâche -->
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md flex justify-between items-center">
-          <div>
-            <h4 class="text-lg font-semibold">Faire les courses 🛒</h4>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">Acheter du lait, du pain et des œufs.</p>
-            <span class="text-xs text-red-500 dark:text-red-400 font-semibold">Priorité : Haute</span>
-          </div>
-          <button class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition">✔️</button>
-        </div>
-
-        <!-- Autres tâches dynamiques -->
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md flex justify-between items-center">
-          <div>
-            <h4 class="text-lg font-semibold">Réviser Angular 📚</h4>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">Comprendre les composants et services.</p>
-            <span class="text-xs text-yellow-500 dark:text-yellow-400 font-semibold">Priorité : Moyenne</span>
-          </div>
-          <button class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition">✔️</button>
-        </div>
-
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md flex justify-between items-center">
-          <div>
-            <h4 class="text-lg font-semibold">Faire du sport 🏋️</h4>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">30 min de cardio et abdos.</p>
-            <span class="text-xs text-green-500 dark:text-green-400 font-semibold">Priorité : Basse</span>
-          </div>
-          <button class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition">✔️</button>
-        </div>
-      </div>
-    </section>
-  </main>
+  <router-outlet></router-outlet>
 </section>
