@@ -1,1 +1,26 @@
-<p>task-list works!</p>
+<section class="mt-8">
+  <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Vos Tâches</h3>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!-- Tâches dynamiques -->
+    <div *ngFor="let task of tasks" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md flex justify-between items-center">
+      <div>
+        <h4 class="text-lg font-semibold">{{ task.title }}</h4>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">{{ task.description }}</p>
+        <span [ngClass]="{
+          'text-red-500 dark:text-red-400': task.priority === 'Haute',
+          'text-yellow-500 dark:text-yellow-400': task.priority === 'Moyenne',
+          'text-green-500 dark:text-green-400': task.priority === 'Basse'
+        }" class="text-xs font-semibold">
+          Priorité : {{ task.priority }}
+        </span>
+        <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p>Créée le : {{ task.createdAt | date:'short' }}</p>
+          <p>Échéance : {{ task.deadline | date:'short' }}</p>
+        </div>
+      </div>
+      <button (click)="updateTask(task)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition">
+        ✔️
+      </button>
+    </div>
+  </div>
+</section>

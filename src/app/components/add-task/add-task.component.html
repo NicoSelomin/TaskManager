@@ -1,0 +1,61 @@
+<div class="max-w-lg mx-auto p-6 mt-8 mb-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+  <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Ajouter une Tâche</h2>
+  <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+    <!-- Champ Titre -->
+    <div class="mb-4">
+      <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Titre</label>
+      <input
+        id="title"
+        formControlName="title"
+        type="text"
+        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+        [ngClass]="{'border-red-500': taskForm.get('title')?.invalid && taskForm.get('title')?.touched}"
+      />
+      <div *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched" class="text-sm text-red-500 mt-2">
+        <div *ngIf="taskForm.get('title')?.errors?.['required']">Le titre est requis.</div>
+        <div *ngIf="taskForm.get('title')?.errors?.['minlength']">Le titre doit comporter au moins 3 caractères.</div>
+      </div>
+    </div>
+
+    <!-- Champ Description -->
+    <div class="mb-4">
+      <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        rows="4"
+        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+        [ngClass]="{'border-red-500': taskForm.get('description')?.invalid && taskForm.get('description')?.touched}"
+      ></textarea>
+      <div *ngIf="taskForm.get('description')?.invalid && taskForm.get('description')?.touched" class="text-sm text-red-500 mt-2">
+        <div *ngIf="taskForm.get('description')?.errors?.['required']">La description est requise.</div>
+        <div *ngIf="taskForm.get('description')?.errors?.['minlength']">La description doit comporter au moins 5 caractères.</div>
+      </div>
+    </div>
+
+    <!-- Champ Priorité -->
+    <div class="mb-4">
+      <label for="priority" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Priorité</label>
+      <select
+        id="priority"
+        formControlName="priority"
+        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+      >
+        <option value="Haute">Haute</option>
+        <option value="Moyenne">Moyenne</option>
+        <option value="Basse">Basse</option>
+      </select>
+    </div>
+
+    <!-- Bouton Ajouter -->
+    <div class="flex justify-end">
+      <button
+        type="submit"
+        [disabled]="taskForm.invalid"
+        class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 disabled:bg-gray-400"
+      >
+        Ajouter
+      </button>
+    </div>
+  </form>
+</div>
