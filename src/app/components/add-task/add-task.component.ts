@@ -1,43 +1,47 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; // Importation de ReactiveFormsModule
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Task } from '../../models/task.model';
+import { TaskServicesService } from '../../services/task-services.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
-  standalone: true,  // Indique que c'est un composant standalone
-  imports: [ReactiveFormsModule, CommonModule],  // Assure-toi d'ajouter ReactiveFormsModule dans 'imports'
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent {
   taskForm: FormGroup;
 
-  @Output() taskAdded = new EventEmitter<Task>(); // Émetteur pour envoyer la tâche ajoutée
+  @Output() taskAdded = new EventEmitter<Task>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private taskService: TaskServicesService, private router: Router) {
     this.taskForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3)]], // Titre requis et longueur min
-      description: ['', [Validators.required, Validators.minLength(5)]], // Description requise et longueur min
-      priority: ['', Validators.required], // Priorité requise
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      description: ['', [Validators.required, Validators.minLength(10)]],
+      priority: ['', Validators.required],
+      deadline: ['', Validators.required] // Ajout de la date limite
     });
   }
 
-  // Méthode pour ajouter une tâche
-  addTask(): void {
+  addTask() {
     if (this.taskForm.valid) {
       const newTask: Task = {
-        idTask: Math.floor(Math.random() * 10000), // Id unique
+        idTask: 0, // Il sera défini dans le service
         title: this.taskForm.value.title,
         description: this.taskForm.value.description,
-        isCompleted: false,
+        isCompleted: false, // Par défaut, la tâche n'est pas complétée
         priority: this.taskForm.value.priority,
-        createdAt: new Date(),
-        deadline: new Date(new Date().setDate(new Date().getDate() + 2)), // deadline dans 2 jours
+        createdAt: new Date(), // Date actuelle
+        deadline: new Date(this.taskForm.value.deadline) // Convertir en date
       };
 
-      this.taskAdded.emit(newTask); // Émet la nouvelle tâche vers le parent
-      this.taskForm.reset(); // Réinitialiser le formulaire après l'ajout
+      this.taskService.addTask(newTask);
+      this.taskAdded.emit(newTask);
+      this.taskForm.reset();
+      this.router.navigate(['/']);
     }
   }
 }

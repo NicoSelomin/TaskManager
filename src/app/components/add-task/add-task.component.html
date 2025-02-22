@@ -1,7 +1,6 @@
 <div class="max-w-lg mx-auto p-6 mt-8 mb-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
   <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Ajouter une Tâche</h2>
   <form [formGroup]="taskForm" (ngSubmit)="addTask()">
-    <!-- Champ Titre -->
     <div class="mb-4">
       <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Titre</label>
       <input
@@ -13,11 +12,9 @@
       />
       <div *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched" class="text-sm text-red-500 mt-2">
         <div *ngIf="taskForm.get('title')?.errors?.['required']">Le titre est requis.</div>
-        <div *ngIf="taskForm.get('title')?.errors?.['minlength']">Le titre doit comporter au moins 3 caractères.</div>
+        <div *ngIf="taskForm.get('title')?.errors?.['minlength']">Le titre doit comporter au moins 5 caractères.</div>
       </div>
     </div>
-
-    <!-- Champ Description -->
     <div class="mb-4">
       <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Description</label>
       <textarea
@@ -29,11 +26,9 @@
       ></textarea>
       <div *ngIf="taskForm.get('description')?.invalid && taskForm.get('description')?.touched" class="text-sm text-red-500 mt-2">
         <div *ngIf="taskForm.get('description')?.errors?.['required']">La description est requise.</div>
-        <div *ngIf="taskForm.get('description')?.errors?.['minlength']">La description doit comporter au moins 5 caractères.</div>
+        <div *ngIf="taskForm.get('description')?.errors?.['minlength']">La description doit comporter au moins 10 caractères.</div>
       </div>
     </div>
-
-    <!-- Champ Priorité -->
     <div class="mb-4">
       <label for="priority" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Priorité</label>
       <select
@@ -46,8 +41,15 @@
         <option value="Basse">Basse</option>
       </select>
     </div>
-
-    <!-- Bouton Ajouter -->
+    <div class="mb-4">
+      <label for="deadline" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Date Limite</label>
+      <input
+        id="deadline"
+        type="date"
+        formControlName="deadline"
+        class="input-field mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+      />
+    </div>
     <div class="flex justify-end">
       <button
         type="submit"
