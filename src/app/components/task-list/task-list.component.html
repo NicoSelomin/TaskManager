@@ -1,8 +1,7 @@
 <section class="mt-8">
   <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Vos Tâches</h3>
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <!-- Tâches dynamiques -->
-    <div *ngFor="let task of tasks" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md flex justify-between items-center">
+    <div *ngFor="let task of tasks" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md flex flex-col justify-between">
       <div>
         <h4 class="text-lg font-semibold">{{ task.title }}</h4>
         <p class="text-gray-600 dark:text-gray-400 text-sm">{{ task.description }}</p>
@@ -13,14 +12,36 @@
         }" class="text-xs font-semibold">
           Priorité : {{ task.priority }}
         </span>
+        <p class="text-sm font-semibold mt-2">
+          État :
+          <span [ngClass]="{
+            'text-green-600 font-bold': task.isCompleted,
+            'text-orange-600 font-bold': !task.isCompleted
+          }">
+            {{ task.isCompleted ? 'Terminée ✅' : 'En cours ⏳' }}
+          </span>
+        </p>
         <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
           <p>Créée le : {{ task.createdAt | date:'short' }}</p>
           <p>Échéance : {{ task.deadline | date:'short' }}</p>
         </div>
       </div>
-      <button (click)="updateTask(task)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition">
-        ✔️
-      </button>
+
+      <!-- Boutons d'action -->
+      <div class="mt-4 flex flex-col gap-2">
+        <button (click)="markTaskAsCompleted(task)"
+                class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition">
+          ✔️ Terminer
+        </button>
+        <button (click)="editTask(task)"
+                class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+          ✏️ Modifier
+        </button>
+        <button (click)="deleteTask(task.idTask)"
+                class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition">
+          🗑️ Supprimer
+        </button>
+      </div>
     </div>
   </div>
 </section>
