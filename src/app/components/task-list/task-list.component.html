@@ -1,7 +1,8 @@
 <section class="mt-8">
   <h3 class="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Vos Tâches</h3>
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <div *ngFor="let task of tasks" class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md flex flex-col justify-between">
+    <div *ngFor="let task of tasks"
+      class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md flex flex-col justify-between">
       <div>
         <h4 class="text-lg font-semibold">{{ task.title }}</h4>
         <p class="text-gray-600 dark:text-gray-400 text-sm">{{ task.description }}</p>
@@ -30,15 +31,16 @@
       <!-- Boutons d'action -->
       <div class="mt-4 flex flex-col gap-2">
         <button (click)="markTaskAsCompleted(task)"
-                class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition">
+          class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition">
           ✔️ Terminer
         </button>
-        <button (click)="editTask(task)"
-                class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+        <a [routerLink]="['/task', task.idTask]"
+          class="px-3 py-1 bg-blue-500 text-white text-center rounded hover:bg-blue-600 transition">
           ✏️ Modifier
-        </button>
+        </a>
+
         <button (click)="deleteTask(task.idTask)"
-                class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition">
+          class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition">
           🗑️ Supprimer
         </button>
       </div>
